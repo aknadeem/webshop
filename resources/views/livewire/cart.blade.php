@@ -18,10 +18,20 @@
                     <td>{{ $item->variant->color }}</td>
                     <td>{{ $item->product?->price}}</td>
                     <td>{{ $item->product?->price * $item->quantity }}</td>
-                    <td>
-                        <button wire:click="decreaseQuantity({{ $item->id }})">-</button>
-                        {{ $item->quantity }}
-                        <button wire:click="increaseQuantity({{ $item->id }})">+</button>
+                    <td class="flex items-center">
+                        <button wire:click="decreaseQuantity({{ $item->id }})"  @disabled($item->quantity == 1)>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </button>
+                        <div class="px-2">
+                            {{ $item->quantity }}
+                        </div>
+                        <button wire:click="increaseQuantity({{ $item->id }})">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </button>
                     </td>
                     <td>
                         <button wire:click="deleteItem({{ $item->id }})">
