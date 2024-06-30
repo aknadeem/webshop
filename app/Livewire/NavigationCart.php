@@ -7,7 +7,11 @@ use Livewire\Component;
 
 class NavigationCart extends Component
 {
-    protected $listeners = ['productAddedToCart' => '$refresh'];
+    protected $listeners = [
+        'productAddedToCart' => '$refresh',
+        'productRemovedFromCart' => '$refresh',
+    ];
+
     public function getCountProperty()
     {
         return CartFactory::make()->items()->sum('quantity');

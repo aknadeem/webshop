@@ -26,9 +26,10 @@ class AddProductVariantToCart
 //            $cart =  auth()->user()->cart ?: auth()->user()->cart()->create();
 //        }
 
-        CartFactory::make()->items()->create([
-            'product_variant_id' => $variantId,
-            'quantity' => 1
-        ]);
+        CartFactory::make()->items()->firstOrCreate([
+            'product_variant_id' => $variantId
+        ], [
+            'quantity' => 0
+        ])->increment('quantity');
     }
 }
