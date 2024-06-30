@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Money\Currency;
 use Money\Money;
 
 class Cart extends Model
@@ -12,20 +14,17 @@ class Cart extends Model
 
     protected $guarded = [];
 
-//    protected function total() :Attribute
-//    {
-//        return Attribute::make(
-//            get: function ($value) {
-//            return $this->quantity * $this->variant->price;
-//        });
-//    }
-
-    protected function gettTotalAttribute()
+    protected function total(): Attribute
     {
-        return $this->items()->reduce(function (Money $total, CartItem $item) {
-           return 0;
-        }, 0);
+        return Attribute::make(
+            get: function ($value) {
+            return $this->items?->reduce(function (Money $total, CartItem $item) {
+                return $total->add($item->subtotal);
+            }, new Money(0, new Currency('USD')));
+        });
     }
+
+
 
     public function items()
     {

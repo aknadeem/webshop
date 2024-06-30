@@ -8,7 +8,7 @@
                     <th class="text-left">Size</th>
                     <th class="text-left">Color</th>
                     <th class="text-left">Quantity</th>
-                    <th class="text-left">Sub total</th>
+                    <th class="text-right">Total</th>
                     <th class="text-left">&nbsp;</th>
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                                 </svg>
                             </button>
                         </td>
-                        <td>{{ $item->subtotal }}</td>
+                        <td class="text-right">{{ $item->subtotal }}</td>
                         <td>
                             <button wire:click="deleteItem({{ $item->id }})">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -48,19 +48,20 @@
             <tfoot>
                 <tr>
                     <td colspan="5" class="text-right font-medium">Total</td>
-                    <td class="font-medium">{{ 000 }}</td>
+                    <td class="font-medium">{{ $this->cart->total }}</td>
                     <td></td>
                 </tr>
         </table>
     </div>
+    <div>
+        <div class="bg-white rounded-lg shadow p-5 mt-12 col-span-1">
+            @guest()
+                <p> please <a href="{{ route('register') }}" class="underline">register</a> or <a href="{{ route('login') }}" class="underline">login</a> to continue </p>
+            @endguest
 
-    <div class="bg-white rounded-lg shadow p-5 mt-12 col-span-1">
-       @guest()
-           <p> please <a href="{{ route('register') }}" class="underline">register</a> or <a href="{{ route('login') }}" class="underline">login</a> to continue </p>
-        @endguest
-
-       @auth()
-               <x-button wire:click="checkout"> checkout </x-button>
-       @endauth
+            @auth()
+                <x-button wire:click="checkout"> checkout </x-button>
+            @endauth
+        </div>
     </div>
 </div>

@@ -13,13 +13,12 @@ class CartItem extends Model
     use HasFactory;
 
     //subTotal
-    protected function getSubtotalAttribute()
+    protected function subtotal(): Attribute
     {
-        return $this->quantity * $this->product->price;
-//        return Attribute::make(
-//            get: function ($value) {
-//            return $this->quantity * $this->variant->price;
-//        });
+        return Attribute::make(
+            get: function () {
+            return $this->product?->price?->multiply($this?->quantity);
+        });
     }
     public function cart(): BelongsTo
     {

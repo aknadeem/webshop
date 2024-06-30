@@ -7,7 +7,7 @@ use App\Models\Cart;
 
 class AddProductVariantToCart
 {
-    public function add($variantId)
+    public function add($variantId,$quantity = 1, $cart = null)
     {
 //        $cart = match (auth()->guest()) {
 //            true => Cart::firstOrCreate([
@@ -26,10 +26,10 @@ class AddProductVariantToCart
 //            $cart =  auth()->user()->cart ?: auth()->user()->cart()->create();
 //        }
 
-        CartFactory::make()->items()->firstOrCreate([
+        ($cart ?: CartFactory::make())->items()->firstOrCreate([
             'product_variant_id' => $variantId
         ], [
             'quantity' => 0
-        ])->increment('quantity');
+        ])->increment('quantity', $quantity);
     }
 }
