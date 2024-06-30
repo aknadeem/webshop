@@ -18,15 +18,18 @@ class ProductImageFactory extends Factory
     {
         return [
             'path' => $this->faker->unique()->randomElement([
-                'productImages/image1.jpg', 'productImages/image2.jpg', 'productImages/image3.jpg', 'productImages/image4.jpg',
-                'productImages/image5.jpg',
-                'productImages/image6.jpg',
-                'productImages/image7.jpg',
-                'productImages/image8.jpg',
-                'productImages/image9.jpg',
-                'productImages/image10.jpg',
-                'productImages/image11.jpg',
-                'productImages/image12.jpg'
+                'productImages/image1.webp',
+                'productImages/image2.webp',
+                'productImages/image3.webp',
+                'productImages/image4.webp',
+                'productImages/image5.webp',
+                'productImages/image6.webp',
+                'productImages/image7.webp',
+                'productImages/image8.webp',
+                'productImages/image9.webp',
+                'productImages/image10.webp',
+                'productImages/image11.webp',
+                'productImages/image12.webp'
             ]),
         ];
     }
